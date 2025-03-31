@@ -5,6 +5,7 @@ CREATE SCHEMA IF NOT EXISTS counter;
 CREATE TABLE counter.clicks (
     id SERIAL PRIMARY KEY,
     banner_id INT NOT NULL,
+    count INT NOT NULL,
     timestamp TIMESTAMP NOT NULL
 );
 

@@ -16,6 +16,6 @@ type StatsResponse struct {
 }
 
 type Stat struct {
-	Timestamp time.Time `json:"ts"`
-	Value     int       `json:"v"`
+	Timestamp time.Time `json:"ts" db:"timestamp"`
+	Value     int       `json:"v" db:"count"`
 }

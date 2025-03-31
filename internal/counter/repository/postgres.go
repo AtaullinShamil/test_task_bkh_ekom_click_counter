@@ -22,7 +22,7 @@ func (p *PostgresRepository) GetStats(ctx context.Context, bannerID int, from ti
 
 	err := p.db.SelectContext(context.Background(),
 		&stats,
-		"SELECT timestamp, count FROM banner_stats WHERE banner_id=$1 AND timestamp BETWEEN $2 AND $3",
+		"SELECT timestamp, count FROM counter.clicks WHERE banner_id=$1 AND timestamp BETWEEN $2 AND $3",
 		bannerID, from, to)
 	if err != nil {
 		return nil, errors.Wrap(err, "SelectContext")
