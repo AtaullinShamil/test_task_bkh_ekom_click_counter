@@ -1,0 +1,21 @@
+services:
+  postgres:
+    container_name: postgres-click-counter
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+  mongo:
+    container_name: mongo-click-counter
+    image: mongo:6
+    restart: on-failure
+    ports:
+      - "27018:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+

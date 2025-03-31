@@ -1,0 +1,19 @@
+server:
+  host: "127.0.0.1"
+  port: 3000
+
+postgres:
+  dsn: postgres://user:password@127.0.0.1:5433/db?sslmode=disable
+  maxOpenConns: 10
+  maxIdleConns: 10
+  connMaxLifetime: "5m"
+  connMaxIdleTime: "1m"
+
+mongo:
+  uri: "mongodb://127.0.0.1:27018"
+  username: "user"
+  password: "password"
+  connectTimeout: "5s"
+
+
+
