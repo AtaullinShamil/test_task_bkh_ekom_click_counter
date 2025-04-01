@@ -10,6 +10,7 @@ require (
 	github.com/json-iterator/go v1.1.12
 	github.com/lib/pq v1.10.9
 	github.com/pkg/errors v0.9.1
+	github.com/pressly/goose v2.7.0+incompatible
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/viper v1.20.1
 	go.mongodb.org/mongo-driver v1.17.3
@@ -41,7 +42,6 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/montanaflynn/stats v0.7.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.3 // indirect
-	github.com/pressly/goose v2.7.0+incompatible // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/sagikazarmark/locafero v0.7.0 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect

@@ -1,6 +1,23 @@
 # test_task_bkh_ekom_click_counter
 Test task for golang developer
 
+
+## HOW TO USE
+- docker-compose up -d
+- go run cmd/migration/main.go
+- go run cmd/counter/main.go
+
+## WRK STATS
+Running 3m test @ http://localhost:3000/counter/1
+  16 threads and 1000 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    54.38ms   20.54ms 299.94ms   88.65%
+    Req/Sec     1.17k   268.56     2.23k    75.13%
+  3347054 requests in 3.00m, 376.66MB read
+  Socket errors: connect 0, read 3141, write 0, timeout 0
+Requests/sec:  18586.26
+Transfer/sec:      2.09MB
+
 ## Задача 1. Счетчик кликов.
 Есть набор баннеров (от 10 до 100). У каждого есть ИД и название (id, name)
 
