@@ -8,6 +8,7 @@ Test task for golang developer
 - go run cmd/counter/main.go
 
 ## WRK STATS
+```
 Running 3m test @ http://localhost:3000/counter/1
   16 threads and 1000 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
@@ -17,6 +18,7 @@ Running 3m test @ http://localhost:3000/counter/1
   Socket errors: connect 0, read 3141, write 0, timeout 0
 Requests/sec:  18586.26
 Transfer/sec:      2.09MB
+```
 
 ## Задача 1. Счетчик кликов.
 Есть набор баннеров (от 10 до 100). У каждого есть ИД и название (id, name)
