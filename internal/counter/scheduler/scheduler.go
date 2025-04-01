@@ -32,7 +32,7 @@ func (s *Scheduler) Start() {
 		ctx := context.Background()
 
 		for t := range ticker.C {
-			ts := t.Truncate(time.Minute)
+			ts := t.Truncate(time.Minute).UTC()
 
 			s.logger.Info("TransferData started at ", ts)
 			err := s.Usecase.TransferData(ctx, ts)
