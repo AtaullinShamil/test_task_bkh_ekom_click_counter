@@ -2,6 +2,8 @@ package repository
 
 import (
 	"context"
+	"fmt"
+	"strings"
 	"time"
 
 	"github.com/AtaullinShamil/test_task_bkh_ekom_click_counter/internal/counter"
@@ -20,7 +22,7 @@ func NewPostgresRepository(db *sqlx.DB) *PostgresRepository {
 func (p *PostgresRepository) GetStats(ctx context.Context, bannerID int, from time.Time, to time.Time) ([]counter.Stat, error) {
 	var stats []counter.Stat
 
-	err := p.db.SelectContext(context.Background(),
+	err := p.db.SelectContext(ctx,
 		&stats,
 		"SELECT timestamp, count FROM counter.clicks WHERE banner_id=$1 AND timestamp BETWEEN $2 AND $3",
 		bannerID, from, to)
@@ -29,4 +31,28 @@ func (p *PostgresRepository) GetStats(ctx context.Context, bannerID int, from ti
 	}
 
 	return stats, nil
+}
+
+func (p *PostgresRepository) SaveStats(ctx context.Context, stats []counter.Stat) error {
+	if len(stats) == 0 {
+		return nil
+	}
+
+	query := "INSERT INTO counter.clicks (timestamp, count, banner_id) VALUES "
+	values := []interface{}{}
+	placeholders := []string{}
+
+	for i, stat := range stats {
+		idx := i * 3
+		placeholders = append(placeholders, fmt.Sprintf("($%d, $%d, $%d)", idx+1, idx+2, idx+3))
+		values = append(values, stat.Timestamp, stat.Value, stat.BannerID)
+	}
+
+	query += strings.Join(placeholders, ", ")
+	_, err := p.db.ExecContext(ctx, query, values...)
+	if err != nil {
+		return errors.Wrap(err, "ExecContext")
+	}
+
+	return nil
 }

@@ -7,9 +7,11 @@ import (
 
 type TemporaryRepository interface {
 	Increase(ctx context.Context, bannerID int) error
-	GetStats(ctx context.Context, bannerID int, from time.Time, to time.Time) ([]Stat, error)
+	GetStatsBeforeTime(ctx context.Context, ts time.Time) ([]Stat, error)
+	DeleteStatsBeforeTime(ctx context.Context, ts time.Time) error
 }
 
 type Repository interface {
 	GetStats(ctx context.Context, bannerID int, from time.Time, to time.Time) ([]Stat, error)
+	SaveStats(ctx context.Context, stats []Stat) error
 }

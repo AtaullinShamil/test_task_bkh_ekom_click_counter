@@ -38,13 +38,10 @@ func (m *MongoRepository) Increase(ctx context.Context, bannerID int) error {
 	return nil
 }
 
-func (m *MongoRepository) GetStats(ctx context.Context, bannerID int, from time.Time, to time.Time) ([]counter.Stat, error) {
+func (m *MongoRepository) GetStatsBeforeTime(ctx context.Context, ts time.Time) ([]counter.Stat, error) {
 	collection := m.db.Collection("clicks")
 
-	filter := bson.M{
-		"timestamp": bson.M{"$gte": from, "$lte": to},
-		"banner_id": bannerID,
-	}
+	filter := bson.M{"timestamp": bson.M{"$lt": ts}}
 
 	cursor, err := collection.Find(ctx, filter)
 	if err != nil {
@@ -58,4 +55,17 @@ func (m *MongoRepository) GetStats(ctx context.Context, bannerID int, from time.
 	}
 
 	return stats, nil
+}
+
+func (m *MongoRepository) DeleteStatsBeforeTime(ctx context.Context, ts time.Time) error {
+	collection := m.db.Collection("clicks")
+
+	filter := bson.M{"timestamp": bson.M{"$lt": ts}}
+
+	_, err := collection.DeleteMany(ctx, filter)
+	if err != nil {
+		errors.Wrap(err, "DeleteMany")
+	}
+
+	return nil
 }

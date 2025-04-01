@@ -7,8 +7,8 @@ type ErrorResponse struct {
 }
 
 type StatsRequest struct {
-	From time.Time `json:"tsFrom"`
-	To   time.Time `json:"tsTo"`
+	From string `json:"from"`
+	To   string `json:"to"`
 }
 
 type StatsResponse struct {
@@ -16,6 +16,7 @@ type StatsResponse struct {
 }
 
 type Stat struct {
-	Timestamp time.Time `json:"ts" db:"timestamp"`
-	Value     int       `json:"v" db:"count"`
+	Timestamp time.Time `json:"ts" db:"timestamp" bson:"timestamp"`
+	Value     int       `json:"v" db:"count" bson:"count"`
+	BannerID  int       `json:"-" db:"banner_id" bson:"banner_id"`
 }
